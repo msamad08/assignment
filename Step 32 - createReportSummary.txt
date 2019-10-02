@@ -1,0 +1,57 @@
+// Copy the entire function below into your program instead of using the one from
+//  the PDF file. That way, you will not have to reformat it once it is pasted
+//  into Visual Studio
+------------------------------
+
+void createReportSummary(vector<Scholarship> sArray,  // Pass by value (copy) the entire array
+                         ofstream &fout)              // Pass the output file by reference
+{
+    int total = 0;                          // Accumulator for total amount
+    int sArraySize = sArray.size();         // Get the size of the array
+    // Accumulators for type totals
+    int baseTotal = 0, baskTotal = 0, dTotal = 0, fTotal = 0, gTotal = 0, softTotal = 0,
+        swimTotal = 0, tTotal = 0, vTotal = 0;
+    
+    // Loop through the array to accumulate the total amount of all scholarships
+    for(int i = 0; i < sArraySize; i++)
+    {
+        total += sArray[i].getAmount();    // Add the Amount of each scholarship to the total
+        string sType = sArray[i].getType(); // Get the type of scholarship for this record
+        // Add the Type's Amount to the appropriate accumulator
+        if(sType == "Baseball") baseTotal += sArray[i].getAmount();
+        else if(sType == "Basketball") baskTotal += sArray[i].getAmount();
+        else if(sType == "Diving") dTotal += sArray[i].getAmount();
+        else if(sType == "Football") fTotal += sArray[i].getAmount();
+        else if(sType == "Golf") gTotal += sArray[i].getAmount();
+        else if(sType == "Softball") softTotal += sArray[i].getAmount();
+        else if(sType == "Swimming") swimTotal += sArray[i].getAmount();
+        else if(sType == "Track") tTotal += sArray[i].getAmount();
+        else if(sType == "Volleyball") vTotal += sArray[i].getAmount();
+    }
+    // Write the summary report output line
+    fout << "\n\nSummary Report \n" 
+         <<     "--------------\n"
+         << "        Total Number of Scholarships: " 
+         << right << setw(12) << sArraySize << endl
+         << "        Baseball:                    $ " 
+         << setw(11) << addCommas(baseTotal) << endl
+         << "        Basketball:                    " 
+         << setw(11) << addCommas(baskTotal) << endl
+         << "        Diving:                        " 
+         << setw(11) << addCommas(dTotal) << endl
+         << "        Football:                      " 
+         << setw(11) << addCommas(fTotal) << endl
+         << "        Golf:                          " 
+         << setw(11) << addCommas(gTotal) << endl
+         << "        Softball:                      " 
+         << setw(11) << addCommas(softTotal) << endl
+         << "        Swimming:                      " 
+         << setw(11) << addCommas(swimTotal) << endl
+         << "        Track:                         " 
+         << setw(11) << addCommas(tTotal) << endl
+         << "        Volleyball:                    " 
+         << setw(11) << addCommas(vTotal) << endl
+         << "        ===========================================\n"
+         << "        Total Scholarship Amount:    $ " 
+         << setw(11) << addCommas(total); 
+}
